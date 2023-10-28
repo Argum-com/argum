@@ -1,5 +1,34 @@
 # argum
 
+## Requirements
+
+```bash
+# install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+# restart terminal or run:
+source ~/.bashrc # or ~/.zshrc
+# install npm
+nvm install node
+# install yarn
+npm install -g yarn
+# install vite
+yarn global add vite
+```
+
+## Project setup
+
+```bash
+# install dependencies
+yarn
+```
+
+## Compiles and hot-reloads for development
+
+```bash
+# serve with hot reload at localhost:5173
+yarn dev
+```
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

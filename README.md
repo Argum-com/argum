@@ -29,6 +29,20 @@ yarn
 yarn dev
 ```
 
+## Docker
+
+### Development
+
+Build the Docker image:
+```bash
+docker build -t argum:local-dev -f dev.Dockerfile .
+```
+
+Run Dev Docker image
+```bash
+docker run --name argum -d -p 80:5173 -v $PWD:/app argum:local-dev
+```
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

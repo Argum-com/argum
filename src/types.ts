@@ -1,11 +1,11 @@
 export interface Message{
-    author: 'string',
-    text: 'string',
+    author: string,
+    text: string,
     timestamp: number,
 }
 
 
 export interface Room{
-    roomName: 'string';
+    roomName: string;
     messages: Array<Message>
 }

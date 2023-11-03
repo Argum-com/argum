@@ -40,7 +40,11 @@ docker build -t argum:local-dev -f Dockerfile .
 
 Run Dev Docker image
 ```bash
-docker run --name argum -d -p 80:5173 -v $PWD/src:/app/src -v $PWD/public:/app/public argum:local-dev
+docker run --name argum -d -p 80:5173 -v argum_node_modules:/app/node_modules -v $PWD:/app argum:local-dev
+```
+
+```bash
+docker exec -it argum sh
 ```
 
 ## React + TypeScript + Vite

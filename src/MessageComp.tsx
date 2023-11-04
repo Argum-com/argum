@@ -9,7 +9,7 @@ export default function MessageComp({ message }: MessageProps) {
   return (
     <Card>
       <Typography variant="overline" component="h2">
-        {message.author}
+        {message.author.$oid}
       </Typography>
       <Typography variant="overline" component="h2">
         {message.text}

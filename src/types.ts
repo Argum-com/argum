@@ -1,5 +1,5 @@
 export interface Message {
-  author: string;
+  author: { $oid: string };
   text: string;
   timestamp: number;
 }

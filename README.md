@@ -35,12 +35,21 @@ yarn dev
 
 Build the Docker image:
 ```bash
-docker build -t argum:local-dev -f dev.Dockerfile .
+docker build -t argum:local-dev -f Dockerfile .
 ```
 
 Run Dev Docker image
 ```bash
-docker run --name argum -d -p 80:5173 -v $PWD:/app argum:local-dev
+docker run --name argum -d -env-file .env -p 80:5173 -v argum_node_modules:/app/node_modules -v $PWD:/app argum:local-dev
+```
+
+Run Dev Docker image on server's network
+```bash
+docker run --name argum -d --env-file .env --network argum -p 80:5173 -v argum_node_modules:/app/node_modules -v $PWD:/app argum:local-dev
+```
+
+```bash
+docker exec -it argum sh
 ```
 
 ## React + TypeScript + Vite

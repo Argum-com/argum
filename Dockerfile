@@ -1,7 +1,8 @@
 FROM node:21-alpine
 ARG port=5173
+ARG api_host
 ENV PORT=$port
-
+ENV VITE_API_HOST=$api_host
 # Set the working directory to /app
 WORKDIR /app
 
@@ -15,7 +16,7 @@ COPY package*.json ./
 COPY yarn.lock ./
 
 # Install dependencies
-RUN yarn install
+RUN yarn
 
 # Copy the current directory contents into the container at /app
 COPY . .

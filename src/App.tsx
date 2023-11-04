@@ -7,6 +7,12 @@ import { WebSocketDemo } from "./Ws";
 function App() {
   const [count, setCount] = useState(0);
 
+  const { data: health } = useQuery("healthCheck", () => {
+    console.log("healthCheck called");
+    healthCheck();
+    console.log(health);
+    console.log("healthCheck finished");
+  });
   return (
     <>
       <div>

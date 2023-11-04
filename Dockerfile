@@ -22,7 +22,7 @@ RUN yarn
 COPY . .
 
 # Build the app
-RUN yarn build
+# RUN yarn build
 
 # Set the command to start the app
 ENTRYPOINT ["yarn", "dev", "--host=0.0.0.0"]

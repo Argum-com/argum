@@ -1,4 +1,4 @@
-import { Message } from "./types";
+import { Message } from "../../types";
 import { Card, Typography } from "@mui/material";
 
 interface MessageProps {

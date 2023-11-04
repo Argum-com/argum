@@ -2,6 +2,7 @@ import React from "react";
 import { Message } from "./types";
 import MessageComp from "./MessageComp";
 import { Box, TextField, Button } from "@mui/material";
+import sendWebSocketMessage from "./websocket";
 
 interface ChatProps {
   messages: Array<Message>;
@@ -22,6 +23,7 @@ export default function Chat({ messages }: ChatProps) {
     };
 
     // send through websockets the final value (message)
+    sendWebSocketMessage(message);
     // send to DB
 
     messages.push(message);

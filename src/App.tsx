@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import "./App.css";
-import { getRoom, healthCheck } from "./api";
+import { getRoom } from "./api";
 
 function App() {
   const { isSuccess, data: room } = useQuery("getRoom", () => getRoom());

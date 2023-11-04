@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import useWebSocket from "react-use-websocket";
 import MessageComp from "./MessageComp";
 import { Message } from "./types";
@@ -11,26 +11,21 @@ interface ChatProps {
 export default function Chat({ messages }: ChatProps) {
   const [value, setValue] = React.useState("");
   const [counter, setCounter] = React.useState(0);
-  const [roomMessages, setRoomMessages] = React.useState<Array<Message>>([]);
-  const { sendMessage, lastMessage } = useWebSocket(
-    import.meta.env.VITE_WS_URL
-  );
-
-  useEffect(() => {
-    if (lastMessage) {
-      console.log(counter, lastMessage);
+  const [roomMessages, setRoomMessages] =
+    React.useState<Array<Message>>(messages);
+  const { sendMessage } = useWebSocket(import.meta.env.VITE_WS_URL, {
+    onMessage: (msg) => {
       setCounter(counter + 1);
       let message: Message = {
         author: { $oid: counter.toString() },
-        text: value,
+        text: msg.data,
         timestamp: Date.now(),
       };
       setRoomMessages((messages) => messages.concat(message));
-    }
-  }, [lastMessage, setRoomMessages]);
+    },
+  });
 
   const handleInputChange = (e: any) => {
-    // console.log(e);
     setValue(e.target.value);
   };
   const handleButtonClick = () => {
@@ -44,7 +39,7 @@ export default function Chat({ messages }: ChatProps) {
     sendMessage(message.text);
     // send to DB
 
-    setRoomMessages((messages) => messages.concat(message));
+    // setRoomMessages((messages) => messages.concat(message));
     setValue("");
   };
 

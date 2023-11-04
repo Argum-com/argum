@@ -1,7 +1,8 @@
 FROM node:21-alpine
 ARG port=5173
+ARG api_host
 ENV PORT=$port
-
+ENV VITE_API_HOST=$api_host
 # Set the working directory to /app
 WORKDIR /app
 

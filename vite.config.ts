@@ -7,5 +7,13 @@ export default defineConfig({
     port: 5173,
     host: '0.0.0.0'
   },
+  proxy: {
+    '/api': {
+      target: 'http://argum-server:3000',
+      changeOrigin: true,
+      secure: false,
+      rewrite: (path) => path.replace(/^\/api/, '')
+    },
+  },
   plugins: [react()],
 })

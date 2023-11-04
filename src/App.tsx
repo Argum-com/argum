@@ -1,12 +1,9 @@
-import "./App.css";
-import RoomComp from "./RoomComp";
+import { ChatApp } from "./components/chat/ChatApp";
 
 function App() {
   return (
     <>
-      <div className="card">
-        <RoomComp />
-      </div>
+      <ChatApp />
     </>
   );
 }

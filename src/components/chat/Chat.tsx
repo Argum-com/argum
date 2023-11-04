@@ -2,7 +2,7 @@ import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import useWebSocket from "react-use-websocket";
 import MessageComp from "./MessageComp";
-import { Message } from "./types";
+import { Message } from "../../types";
 
 interface ChatProps {
   messages: Array<Message>;
@@ -28,13 +28,13 @@ export default function Chat({ messages }: ChatProps) {
   const handleInputChange = (e: any) => {
     setValue(e.target.value);
   };
-  const handleButtonClick = () => {
+  const handleButtonClick = (e: any) => {
+    e.preventDefault()
     let message: Message = {
       author: { $oid: "blabla" },
       text: value,
       timestamp: Date.now(),
     };
-
     // send through websockets the final value (message)
     sendMessage(message.text);
     // send to DB
@@ -44,22 +44,27 @@ export default function Chat({ messages }: ChatProps) {
   };
 
   return (
-    <Box>
+    <>
+      <Box className="chat-history">
       {roomMessages.map((message, index) => (
         <MessageComp key={index} message={message} />
       ))}
-      <Box>
-        <TextField
-          id="outlined-basic"
-          label="Enter Text"
-          variant="outlined"
-          value={value}
-          onChange={handleInputChange}
-        />
-        <Button variant="contained" color="primary" onClick={handleButtonClick}>
-          Send
-        </Button>
       </Box>
-    </Box>
+      <form onSubmit={handleButtonClick} className="input-form">
+        <Box className="user-input">
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              value={value}
+              onChange={handleInputChange}
+              className="user-text-input"
+              autoComplete="off"
+            />
+            <Button className="user-button-input" variant="contained" color="primary" onClick={handleButtonClick}>
+              Send
+            </Button>
+        </Box>
+      </form>
+    </>
   );
 }

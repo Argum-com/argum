@@ -1,17 +1,13 @@
-import { useQuery } from "react-query";
 import "./App.css";
-import { getRoom } from "./api";
+import RoomComp from "./RoomComp";
 
 function App() {
-  const { isSuccess, data: room } = useQuery("getRoom", () => getRoom());
-
-  return isSuccess ? (
+  return (
     <>
-      <p>The room name is {room?.name}</p>
-      <p>The messages are {room?.messages.map((message) => message.text)}</p>
+      <div className="card">
+        <RoomComp />
+      </div>
     </>
-  ) : (
-    <p>loading...</p>
   );
 }
 

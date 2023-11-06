@@ -29,6 +29,7 @@ export default function Chat({ messages }: ChatProps) {
   const handleInputChange = (e: BaseSyntheticEvent) => {
     setValue(e.target.value);
   };
+
   const handleButtonClick = (e: BaseSyntheticEvent) => {
     e.preventDefault();
     let message: Message = {
@@ -67,7 +68,7 @@ export default function Chat({ messages }: ChatProps) {
           gap: "3px",
           maxWidth: "100%",
           overflowY: "scroll",
-          height: "500px",
+          height: "600px", //TODO: mui invastigate about reading screen dimentions
         }}
         // className="chat-history"
       >
@@ -76,47 +77,53 @@ export default function Chat({ messages }: ChatProps) {
             sx={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "stretch",
-              padding: "0px",
+              alignItems: index % 2 == 0 ? "flex-start" : "flex-end", //TODO: Add author based alignment
+              padding: "10px",
             }}
             key={index}
             ref={index == roomMessages.length - 1 ? scrollRef : null}
           >
-            <MessageComp message={message} />
+            <MessageComp message={message} index={index} />
           </ListItem>
         ))}
       </List>
-      <form onSubmit={handleButtonClick} className="input-form">
-        <Box
-          // className="user-input"
+
+      <Box
+        // className="user-input"
+        sx={{
+          display: "flex",
+          marginTop: "5px",
+          gap: "10px",
+          justifyContent: "flex-start",
+        }}
+      >
+        <TextField
+          id="outlined-basic"
           sx={{
-            display: "flex",
-            marginTop: "5px",
-            gap: "10px",
-            justifyContent: "flex-start",
+            width: "100%",
           }}
+          variant="outlined"
+          value={value}
+          onChange={handleInputChange}
+          // className="user-text-input"
+          autoComplete="off"
+          placeholder="Write your next argument..."
+          multiline
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              handleButtonClick(e);
+            }
+          }}
+        />
+        <Button
+          className="user-button-input"
+          variant="contained"
+          color="primary"
+          onClick={handleButtonClick}
         >
-          <TextField
-            id="outlined-basic"
-            sx={{
-              width: "100%",
-            }}
-            variant="outlined"
-            value={value}
-            onChange={handleInputChange}
-            // className="user-text-input"
-            autoComplete="off"
-          />
-          <Button
-            className="user-button-input"
-            variant="contained"
-            color="primary"
-            onClick={handleButtonClick}
-          >
-            Send
-          </Button>
-        </Box>
-      </form>
+          Send
+        </Button>
+      </Box>
     </Box>
   );
 }

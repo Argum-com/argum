@@ -3,6 +3,7 @@ import { Message } from "../../types";
 
 interface MessageProps {
   message: Message;
+  index: number;
 }
 
 // converts a unix timestmap to ISO format
@@ -15,17 +16,21 @@ function convertTimestampToISO(timestamp: number) {
   let day = date.getDate();
   let hour = date.getHours();
   let minute = date.getMinutes();
-  let hourFormatted = hour % 12 || 12; // hour returned in 24 hour format
   let minuteFormatted = minute < 10 ? "0" + minute : minute;
-  return `${hourFormatted}:${minuteFormatted}, ${day}/${month}/${year}`;
+  return `${hour}:${minuteFormatted}, ${day}/${month}/${year}`;
 }
 
-export default function MessageComp({ message }: MessageProps) {
+export default function MessageComp({ message, index }: MessageProps) {
   return (
     <Paper
-      square
-      sx={{ display: "flex", flexDirection: "column" }}
-      elevation={1}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: index % 2 == 0 ? "#007bff" : "#4caf50",
+        color: "white",
+        borderRadius: "10px",
+      }}
+      elevation={3}
     >
       <Typography
         sx={{
@@ -43,6 +48,9 @@ export default function MessageComp({ message }: MessageProps) {
         sx={{
           fontSize: "12px",
           alignSelf: "self-start",
+          wordWrap: "break-word",
+          width: "100px",
+          whiteSpace: "pre-line",
         }}
         margin="5px"
         variant="h2"

@@ -5,10 +5,7 @@ body {
   overflow: hidden;
 }
 
-.room-title {
-}
-
-.chat-root { 
+.chat-root {
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
@@ -20,15 +17,12 @@ body {
   overflow: scroll;
 }
 
-.input-form {
-}
-
 .user-input {
   width: 100%;
   display: flex;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
-.user-input .user-text-input { 
+.user-input .user-text-input {
   flex-grow: 3;
 }
